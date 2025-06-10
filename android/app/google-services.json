@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1074530244925",
+    "project_id": "flame-50a67",
+    "storage_bucket": "flame-50a67.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074530244925:android:160bb5caba77a4cd198d54",
+        "android_client_info": {
+          "package_name": "com.example.secureflame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByNtzvRXd7OYFzYDXSxif_TE8Q-SGpUqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
