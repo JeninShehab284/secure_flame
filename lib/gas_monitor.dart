@@ -24,6 +24,7 @@ class GasLeakMonitor {
       print("Gas leak detected: $detected");
 
       if (detected && gasLeakDetected == false) {
+        print("Sending notification...");
         gasLeakDetected = true;
         showNotification(
           "Secure Flame",

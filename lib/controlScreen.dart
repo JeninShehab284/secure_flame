@@ -20,7 +20,7 @@ class _ControlScreenState extends State<ControlScreen> {
   late DatabaseReference _Rtemperature;
   late DatabaseReference _Rstatus;
   late DatabaseReference _RmotionSensor;
-  int temperature = 0;
+  double temperature = 0;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   @override
@@ -37,6 +37,7 @@ class _ControlScreenState extends State<ControlScreen> {
     _Rstatus.onValue.listen((event) {
       //final newStatus = event.snapshot.value.toString();
       final val = event.snapshot.value;
+      print("🔥 status = $val");
       setState(() {
         if (val == null) {
           isLoading = true;
@@ -50,10 +51,12 @@ class _ControlScreenState extends State<ControlScreen> {
     _Rtemperature.onValue.listen((event) {
       final newTemp = event.snapshot.value;
       setState(() {
-        if (newTemp is int) {
+        if (newTemp is double) {
           temperature = newTemp;
+        } else if (newTemp is int) {
+          temperature = newTemp.toDouble();
         } else if (newTemp is String) {
-          temperature = int.tryParse(newTemp) ?? 0;
+          temperature = double.tryParse(newTemp)?.toDouble() ?? 0;
         } else {
           temperature = 0;
         }
@@ -142,7 +145,7 @@ class _ControlScreenState extends State<ControlScreen> {
                       Icon(Icons.device_thermostat),
                       SizedBox(width: 5),
                       Text(
-                        'Temperature: $temperature°C',
+                        'Temperature: ${temperature.toStringAsFixed(1)}°C',
                         style: TextStyle(
                             fontSize: 20,
                             fontFamily: 'Poppins',
@@ -157,6 +160,9 @@ class _ControlScreenState extends State<ControlScreen> {
                   icon: Icons.play_circle,
                   onPressed: () async {
                     await _Rstatus.set(true);
+                    await FirebaseDatabase.instance
+                        .ref("flame/control_temperature")
+                        .set(0);
                     final snapshot = await _Rstatus.get();
                     final status = snapshot.value;
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -167,6 +173,9 @@ class _ControlScreenState extends State<ControlScreen> {
                         duration: Duration(seconds: 2),
                       ),
                     );
+                    setState(() {
+                      selectedTemp = 90;
+                    });
                   },
                 ),
                 SizedBox(height: 10),
@@ -175,6 +184,9 @@ class _ControlScreenState extends State<ControlScreen> {
                   icon: Icons.power_settings_new,
                   onPressed: () async {
                     await _Rstatus.set(false);
+                    await FirebaseDatabase.instance
+                        .ref("flame/control_temperature")
+                        .set(0);
                     final snapshot = await _Rstatus.get();
                     final status = snapshot.value;
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -296,56 +308,3 @@ class _ControlScreenState extends State<ControlScreen> {
     );
   }
 }
-// FirebaseDatabase.instance
-//     .ref("flame/motion_detected")
-//     .onValue
-//     .listen((event) async {
-//   if (motionSensorEnabled) {
-//     final time = DateTime.now().millisecondsSinceEpoch;
-//     await _RlastMotionTime.set(time);
-//   }
-// });
-
-//   Future.doWhile(() async {
-//     await Future.delayed(Duration(minutes: 1));
-//     if (!motionSensorEnabled) return true;
-//
-//     final snapshot = await _RlastMotionTime.get();
-//     if (snapshot.exists) {
-//       final lastMotion = snapshot.value;
-//       if (lastMotion is int) {
-//         final now = DateTime.now().millisecondsSinceEpoch;
-//         final diff = now - lastMotion;
-//         if (diff > 5 * 60 * 1000) {
-//           // أكثر من 5 دقائق بدون حركة، أرسل تنبيه
-//           sendNoMotionNotification();
-//         }
-//       }
-//     }
-//     return true;
-//   });
-// }
-
-// void _initializeNotifications() async {
-//   const initializationSettingsAndroid = AndroidInitializationSettings('logo');
-//   final initializationSettings =
-//       InitializationSettings(android: initializationSettingsAndroid);
-//   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-// }
-
-// void sendNoMotionNotification() async {
-//   const androidDetails = AndroidNotificationDetails(
-//     'motion_channel_id',
-//     'Motion Notifications',
-//     importance: Importance.high,
-//     priority: Priority.high,
-//   );
-//   const notificationDetails = NotificationDetails(android: androidDetails);
-//
-//   await flutterLocalNotificationsPlugin.show(
-//     0,
-//     'No Motion Detected!',
-//     'It\'s been 5 minutes without movement near the stove.',
-//     notificationDetails,
-//   );
-// }

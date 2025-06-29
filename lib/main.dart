@@ -3,12 +3,16 @@ import 'package:get/get.dart';
 import 'controlScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'TemperatureMonitor.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); //Filter configuration
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(SecureFlameApp());
-  TemperatureMonitor().init(); //temperature monitoring
+  TemperatureMonitor().init();
+  await Firebase.initializeApp().then((_) {
+    print("✅ Firebase Initialized");
+  });
 }
 
 class SecureFlameApp extends StatelessWidget {
@@ -21,7 +25,35 @@ class SecureFlameApp extends StatelessWidget {
   }
 }
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    testFirebase();
+    FirebaseDatabase.instance.ref("test_from_flutter").set({
+      "status": "flutter_connected",
+    }).then((_) {
+      print("✅ تمت الكتابة بنجاح");
+    }).catchError((e) {
+      print("❌ فشل الاتصال بـ Firebase: $e");
+    });
+  }
+
+  void testFirebase() async {
+    try {
+      final ref = FirebaseDatabase.instance.ref("test");
+      await ref.set({"message": "hello"});
+      print("✅ تم الإرسال إلى Firebase بنجاح");
+    } catch (e) {
+      print("❌ خطأ في الاتصال بـ Firebase: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

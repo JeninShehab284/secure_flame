@@ -13,18 +13,16 @@ class TemperatureMonitor {
     );
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
-    // مراقبة درجة الحرارة
     databaseReference.onValue.listen((event) {
       final temp = event.snapshot.value;
       print("درجة الحرارة: $temp");
       if (temp != null && temp is num && temp >= 100) {
-        showNotification("Warning", "Be careful, it's boiling over!");
+        showNotification("Secure Flame", "Be careful, it's boiling over!");
       }
     });
   }
 
   void showNotification(String? title, String? body) async {
-    // تأكد من أن القيم ليست null
     final validTitle = title ?? "Warning";
     final validBody = body ?? 'High temperature.';
 
