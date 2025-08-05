@@ -1,16 +1,29 @@
-# secureflame
+# 🔥 SecureFlame
 
-A new Flutter project.
+**SecureFlame** is a smart cooking companion app that allows you to remotely control your gas stove, monitor cooking temperatures, detect motion around the stove, detect gas leak, and access a library of delicious recipes with step-by-step instructions and tutorial videos.
 
-## Getting Started
+## 💡 Features
 
-This project is a starting point for a Flutter application.
+-  **Remote gas control**: Turn the gas on/off through the app.
+-  **Temperature monitoring**: Adjust and view the stove's temperature in real time.
+-  **Dish temperature display**: See the current temperature of the dish being cooked.
+-  **Motion detection**: Enable a motion sensor to monitor movement around the stove for safety alerts.
+-  **Built-in recipe library**: Explore recipes with ingredients and instructions.
+-  **Video tutorials**: Watch step-by-step videos to easily follow the recipe.
 
-A few resources to get you started if this is your first Flutter project:
+## 🧰 Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter** – Mobile application development
+- **Firebase Realtime Database** – Data storage and sync
+- **Arduino Uno R4 WiFi** – Hardware control unit
+- **Sensors**:
+  - MQ-6: Gas leak detection
+  - SHT30: Temperature and humidity
+  - HC-SR501: Motion sensor
+- **Servo Motor** – Controls the gas valve
+## 📸 Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+---
+
+## 📸 Screenshots (Optional)
