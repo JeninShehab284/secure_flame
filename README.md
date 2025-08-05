@@ -22,8 +22,33 @@
   - HC-SR501: Motion sensor
 - **Servo Motor** – Controls the gas valve
 ## 📸 Screenshots
+**Welcome Screen**
 
+![Welcome Screen](https://github.com/JeninShehab284/secure_flame/blob/main/1.png?raw=true)
 
 ---
 
-## 📸 Screenshots (Optional)
+**Control Screen**
+
+| Control Screen       |     |
+|----------------------|---------------------|
+| ![Control Screen](https://github.com/JeninShehab284/secure_flame/blob/main/2.png?raw=true) | ![Button to Turn On](https://github.com/JeninShehab284/secure_flame/blob/main/Button%20to%20turn%20on.jpg?raw=true) |
+
+---
+
+**Recipes Screens**
+
+| Recipes       | Ingredients       | Ingredients        | Instrections        |
+|----------------|----------------|----------------|----------------|
+| ![Screen 3](https://github.com/JeninShehab284/secure_flame/blob/main/3.png?raw=true) | ![Screen 4](https://github.com/JeninShehab284/secure_flame/blob/main/4.png?raw=true) | ![Screen 5](https://github.com/JeninShehab284/secure_flame/blob/main/5.png?raw=true) | ![Screen 6](https://github.com/JeninShehab284/secure_flame/blob/main/6.png?raw=true) |
+
+---
+
+**Setting Screen**
+
+|Setting Screen       | AboutUs Screen      |
+|----------------|----------------|
+| ![Screen 7](https://github.com/JeninShehab284/secure_flame/blob/main/7.png?raw=true) | ![Screen 8](https://github.com/JeninShehab284/secure_flame/blob/main/8.png?raw=true) |
+
+
+
